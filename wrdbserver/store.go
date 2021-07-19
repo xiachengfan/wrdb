@@ -142,7 +142,8 @@ func (s *Store) Open(enableSingle bool, localID string) error {
 		return fmt.Errorf("new bolt store: %s", err)
 	}
 
-	logStore, err = NewBoltWal(s.RaftDir)
+	walPath := filepath.Join(s.RaftDir + "/war")
+	logStore, err = NewBoltWal(walPath)
 	stableStore = boltDB
 
 	// Instantiate the Raft systems.
